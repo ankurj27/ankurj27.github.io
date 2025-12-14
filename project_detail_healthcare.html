@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Service</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Healthcare Service Provider Dashboard</h1>
+  <p>Turning Healthcare Data into Meaningful Insights.</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+     <!-- PROJECT 1 -->
+  <div class="project">
+    <!-- AUTO CAROUSEL -->
+    <div class="carousel" id="carousel1">
+            <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/healthcare.png" />
+    </div>
+    <div class="dots" id="dots1"></div>
+  </div>
+
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>This dashboard provides a high-level summary of healthcare billing, treatment costs, insurance coverage, and departmental performance across multiple cities. It helps decision-makers understand cost distribution, identify high-revenue procedures, and monitor patient billing patterns.</p>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights</h3>
+          <ul>
+            <li><strong>Total Billing: </strong>$3M with an average billing of $675 per visit-indicating balanced service utilization across facilities.</li>
+            <li><strong>Medication Cost: </strong>$546K, averaging $109 per patient, showing medication contributes moderately to overall expenses.</li>
+            <li><strong>Insurance Coverage: </strong>$2M, reducing out-of-pocket costs to $1M, suggesting good insurance penetration among patients.</li>
+            <li><strong>Room Charges: </strong>$180K - relatively lower, reflecting short stays or efficient bed turnover.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Regional Trends</h3>
+          <ul>
+            <li>Cities like Edinburgh, Birmingham, and Sheffield show higher billing amounts, aligning with higher patient volumes and specialized services.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Procedural Insights</h3>
+          <ul>
+            <li>Diagnostic services like X-ray ($1.05M) and CT Scan ($805K) contribute over 50% of total billing, highlighting diagnostics as key revenue drivers.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Department-Wise Overview</h3>
+          <ul>
+            <li><strong>Cardiology ($0.85M)</strong> and <strong> Orthopedics ($0.81M)</strong> are top contributors, likely due to high-complexity and high-demand procedures.</li>
+            <li><strong>Pediatrics </strong> and <strong>Neurology </strong> show moderate costs, balancing overall hospital load.</li>
+            <p><strong>Diagnosis & Service Type Mix</strong></p>
+            <strong>Fracture</strong> and <strong> Hyptertension </strong>are the most common cases across emergency and inpatient services, reflecting typical hospital case patterns.</strong>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            <li>This dashboard provides a unified view of healthcare costs — enabling administrators to identify high-cost areas, optimize department budgets, and improve care delivery without compromising affordability.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li>Power BI Desktop, Google Sheet</li>
+          </ul>  
+        </article>
+        <a class="btn" onclick="window.location.href='projects.html'">Back to Projects</a>
+
+      </div>
+    </section>
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 3000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blinkit Sales Analysis</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Blinkit Sales & Performance Insights Dashboard</h1>
+  <p>Analyze Blinkit's retail sales data to identify growth opportunities and consumer behavior patterns.</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+
+     <!-- PROJECT 1 -->
+  <div class="project">
+    <!-- AUTO CAROUSEL -->
+    <div class="carousel" id="carousel1">
+            <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/blinkit.png" />
+    </div>
+    <div class="dots" id="dots1"></div>
+
+  </div>
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>This dashboard captures Blinkit's performance metrics — from total sales to outlet-level insights. It tells a story of how data can reveal what customers truly value in everyday shopping.</p>
+
+          <h3 class="section-title" style="margin-top:26px">The Big Picture</h3>
+          <ul>
+            <li><strong>$1.2M in total sales —</strong>a strong pulse of consistent customer trust.</li>
+            <li><strong>8,523 items sold —</strong>every item, a tiny story of choice.</li>
+            <li><strong>$141 average sale value —</strong>steady purchasing power across outlets.</li>
+            <li><strong>3.9 average rating —</strong>satisfaction that keeps customers coming back.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Where the Sales Are Coming From</h3>
+          <ul>
+            <li><strong>Supermarket Type 1 leads with $787K in sales, </strong>contributing over 65% of revenue.</li>
+            <li><strong>Tier 3 cities outperform Tier 1 & 2 with $472K in sales —</strong>smaller towns, bigger opportunities.</li>
+            <li><strong>Grocery Stores trail at $151K,</strong>signaling room for better visibility and engagement.</li>
+            <li><strong>Large outlets outperform with $507.9K —</strong>showing scalability works when backed by variety.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">What Customers Love Most</h3>
+          <ul>
+            <li><strong>Top Categories: </strong>Fruits & Snack Foods (~$180K each) — the perfect balance between healthy and indulgent.</li>
+            <li><strong>Fat Content Preference: </strong>Regular-fat products rule with $776K, nearly double low-fat sales.</p>
+            Comfort food always wins — even in the data.
+            <li><strong>Item Visibility: </strong>Low visibility in smaller stores (0.10) = untapped potential.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Growth Over Time (2012-2022)</h3>
+          <ul>
+            <li><strong>Steady climb</strong>across the decade, peaking at <strong>$205K in 2018.</strong></li>
+            <li>Post-2018:<strong>stable growth, </strong>signaling maturity and brand reliability.</li>
+            <li>Blinkit's evolution reflects <strong> consistency, adaptability, and smart scaling.</strong></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights for Strategy</h3>
+          <ul>
+            <li><strong>Tier 3 expansion =</strong>highest potential for future growth.</li>
+            <li><strong>Improve item visibility </strong>to boost smaller outlet sales.</li>
+            <li><strong>Regular-fat & snack items =</strong>consistent customer favorites.</li>
+            <li><strong>Large outlets deliver higher ROI —</strong>sustain and replicate this model.</li>
+            <li><strong>Balanced product mix</strong>(health + indulgence) = customer retention.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            <li>Blinkit's data tells more than just performance metrics —it's a story of <strong>how everyday choices shape business growth.</strong></li>
+            <li>From metros to Tier 3 towns, customers show that convenience, comfort, and trust drive success. When data meets storytelling, insight becomes strategy.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li>Power BI Desktop, Google Sheet</li>
+          </ul>  
+        </article>
+        <a class="btn" onclick="window.location.href='projects.html'">Back to Projects</a>
+      </div>
+    </section>
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 3000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon Top 50 Titles</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Amazon Top 50 Titles  Dashboard</h1>
+  <p>Insights into reader preferences, author dominance, and market trends</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+
+     <!-- PROJECT 1 -->
+    <div class="carousel" id="carousel1">
+            <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/amazonTop50.png" />
+    </div>
+
+    <div class="dots" id="dots1"></div>
+
+  </div>
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>This dashboard explores Amazon's Top 50 books through multiple lenses—reviews, authors, genres, pricing, and time trends. Together, these views reveal which titles dominate reader attention, which authors consistently perform well, and how pricing and reviews have evolved over the years.</p>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights</h3>
+          <ul>
+            <li><strong>A few titles dominate reviews</strong>Books like Where the Crawdads Sing and The Girl on the Train significantly outperform others in total reviews, indicating strong word-of-mouth momentum.</li>
+            <li><strong>Author brand matters</strong>Authors such as Jeff Kinney, Gary Chapman, and J.K. Rowling show high ratings and multiple appearances, highlighting the power of loyal readership.</li>
+            <li><strong>Reviews grow faster than prices</strong>Over time, review counts increase sharply, while prices remain relatively stable—suggesting demand is driven more by popularity than discounting.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Highlights</h3>
+          <ul>
+            <li><strong>Blockbuster effect:</strong>A small number of titles capture a disproportionate share of reviews, acting as anchor products within the Top 50.</li>
+            <li><strong>Repeat performers:</strong>Several authors appear multiple times, reinforcing that consistent storytelling and trust outperform one-hit successes.</li>
+            <li><strong>Genre concentration:</strong>The Top 50 is split mainly across two dominant genres, indicating limited but strong reader preferences.</li>
+            <li><strong>Stable pricing strategy:</strong>Despite fluctuations, average prices do not spike with popularity, implying competitive and reader-friendly pricing.</li>
+            <li><strong>Peak engagement years:</strong>Certain years show sharp review spikes, reflecting periods of heightened reader activity and breakout releases.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            <li><p>Amazon's Top 50 books are driven less by aggressive pricing and more by author credibility, genre focus, and sustained reader engagement. For publishers and analysts, the key lesson is clear: building long-term author brands and cultivating loyal audiences delivers more impact than short-term promotional tactics.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li>Tableau Desktop, Google Sheet</li>
+          </ul>  
+        </article>
+        <a class="btn" onclick="window.location.href='projects.html'">Back to Projects</a>
+      </div>
+    </section>
+ 
+
+
+
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 3000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>

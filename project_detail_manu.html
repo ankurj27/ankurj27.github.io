@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manufacturing Analytics</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Manufacturing Analytics Dashboard</h1>
+  <p>Optimizing Manufacturing Performance Through Data</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+
+     <!-- PROJECT 1 -->
+  <div class="project">
+    <div class="carousel" id="carousel1">
+            <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/manu1.png" />
+      <img class="active" src="images/projects/dashboards/manu2.png" />
+    </div>
+    <div class="dots" id="dots1"></div>
+  </div>
+
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>This project analyzes manufacturing operations data to evaluate performance across production, quality, cost, and environmental dimensions. Using an interactive Tableau dashboard, it uncovers efficiency patterns, operational risks, and improvement opportunities on the factory floor.</p>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights</h3>
+          <ul>
+            <li><strong>Strong production performance</strong>driven by Automotive and Textile machines, delivering consistent output with 275K+ cumulative units.</li>
+            <li><strong>Quality issues are category- and time-specific,</strong>with Automotive leading defects and a sharp spike in Week 45 indicating operational instability.</li>
+            <li><strong>Proactive maintenance minimized downtime,</strong>completing repairs within planned hours and keeping YTD downtime limited to 509 hours.</li>
+            <li><strong>Environmental conditions directly impact quality,</strong>as higher temperature and humidity significantly increased defects—especially in electronics.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Production Pulse</h3>
+          <ul>
+            <li>This year's <strong>YTD production hit 45,642 units,</strong> with a <strong> cumulative total of 275,803 units </strong> — a strong sign of steady output.</li>
+            <li>The <strong>Automotive </strong>and <strong> Textile </strong> lines led the way, with <strong> Machine ID 2 (Automotive) </strong> and <strong>Machines 5 & 7 (Textiles) </strong> emerging as top performers.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">When Quality Speaks</h3>
+          <ul>
+            <li>A total of <strong>1,574 YTD defects </strong> and <strong>1,979 hours of rework </strong> where production teams fought back to maintain standards.</li>
+            <li>The <strong>Automotive category </strong>topped defects (2,043), followed by <strong> Appliances and Textiles.</strong></li>
+            <li>One week stood out — <strong>Week 45 </strong>, when defects spiked to 50 while production dipped.</li>
+            <li>A classic case that hints at either a machine breakdown or the “post-repair stabilization” phase many factories experience.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Costs, Shifts & Control</h3>
+          <ul>
+            <li><p>Cumulative <strong>production cost crossed $13M, </strong> but maintenance teams kept things under control — finishing most fixes <strong>ahead of scheduled maintenance hours,</strong> unplanned downtime (509 hrs YTD).
+            Operators stayed well-distributed across all shifts — day (1,780), night (1,828), and swing (1,885) — keeping production momentum balanced 24/7.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Environment Factor</h3>
+          <ul>
+            <li>One of the most interesting insights?</li>
+            <li>Defects climbed whenever <strong>temperature rose above 20°C </strong> and <strong>humidity passed 40%, </strong> especially in <strong>electronics </strong> (497 defects).</li>
+            <li>It's a reminder that <strong>quality doesn't just depend on process — but also on the climate around the machines.</strong></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            This project reaffirmed how data is the heartbeat of modern manufacturing.
+            When you connect production, people, cost, and environment into one dashboard — every number starts telling a story:</li>
+            <li>Where efficiency thrives
+            <li>Where quality dips</li>
+            <li>And where the next improvement lies</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li>Tableau Desktop, Google Sheet</li>
+          </ul>  
+        </article>
+        <a class="btn" onclick="window.location.href='projects.html'">Back to Projects</a>
+      </div>
+    </section>
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 1000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>

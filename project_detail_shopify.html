@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopify</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Shopify Sales & Customer Funnel Performance Report</h1>
+  <p>A holistic view of sales trends, customer behavior, retention metrics, and regional performance.</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+
+     <!-- PROJECT 1 -->
+  <div class="project">
+    <!-- AUTO CAROUSEL -->
+    <div class="carousel" id="carousel1">
+      <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/shopify.png" />
+    </div>
+
+    <div class="dots" id="dots1"></div>
+
+  </div>
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>This dashboard provides a quick snapshot of overall sales performance, customer behavior, and regional activity. It shows strong revenue, a healthy balance of new and repeat customers, and clear growth across key markets. The data highlights where the business is performing well and where future opportunities exist.</p>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights</h3>
+          <ul>
+            <li>$4.18M net sales with 7,500+ orders</li>
+            <li>4,431 customers with 46% repeat buyers.</li>
+            <li>Lifetime value: $943; Repeat rate: 46%</li>
+            <li>Top cities: Houston, New York, Dallas</li>
+            <li>Shopify Payments leads with 58% share</li>
+            <li>Sales trend peaks at $683K in latest period</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Customer Behavior</h3>
+          <ul>
+            <li>With 4,431 total customers, the brand has built a sizeable audience base.</li>
+            <li>54% single-order customers indicate successful acquisition, but still untapped room for deeper engagement.</li>
+            <li>46% repeat customers reflect trust, satisfaction, and successful retention efforts.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Retention & Value Metrics</h3>
+          <ul>
+            <li><p>A solid Lifetime Value of $943.6 shows customers continue to generate revenue even after their first purchase.</p></li>
+            <li><p>The 46% repeat rate reinforces that nearly half of the customer base returns to buy again.</p></li>
+            <li><p>Purchase frequency of 1.68 gives room for growth through loyalty programs or targeted remarketing.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Regional & Geographic Performance</h3>
+          <ul>
+            <li><p>Cities like Houston, New York, Dallas, and El Paso lead in net sales, becoming core revenue contributors.</p></li>
+            <li><p>Dense activity on the map highlights strong presence in southern and east-coast regions.</p></li>
+            <li><p>Underrepresented regions show opportunities for expansion, targeted ads, or region-based promotions.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Payment Channel Insights</h3>
+          <ul>
+            <li><p>Shopify Payments (58%) is the preferred payment mode, signaling trust in seamless and secure checkout.</p></li>
+            <li><p>PayPal, gift cards, and manual payments diversify customer preferences and reduce friction.</p></li>
+            <li><p>Understanding payment patterns helps optimize checkout experience and reduce cart drop-offs.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Product Category Performance</h3>
+          <ul>
+            <li><p>Top sellers include Pens, Apparel, and Stationery, which consistently drive the highest revenue.</p></li>
+            <li><p>This mix shows customers value both essential and lifestyle-based products.</p></li>
+            <li><p>Lower-performing items can be revisited for bundling, repositioning, or targeted promotions.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Sales Trend Over Time</h3>
+          <ul>
+            <li><p>The upward trend peaking at $683K reflects strong performance in the latest period.</p></li>
+            <li><p>The rise may be influenced by seasonal demand, product launches, or successful marketing campaigns.</p></li>
+            <li><p>Sustaining this momentum offers a path toward predictable and long-term revenue growth.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            <li><p>The Shopify business is performing with healthy sales growth, solid retention, and strong regional demand, but there is still room to increase purchase frequency and expand into underperforming regions. With strategic targeting and customer engagement initiatives, the business can scale even more effectively.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li><p>Power BI Desktop, Google Sheet</p></li>
+          </ul>
+
+        </article>
+      </div>
+    </section>
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 3000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>

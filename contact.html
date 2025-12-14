@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Analytics with Ankur</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+<!-- HERO -->
+<section class="contact-hero">
+  <h1>Contact</h1>
+</section>
+
+<!-- CONTENT -->
+<main class="contact-container">
+  <h3>Open to analytics roles and project collaborations — let's connect and explore possibilities.</h3>
+  <div class="contact-card">
+    <form id="contactForm" action="mailto:27ankurjain@gmail.com" method="post" enctype="text/plain" onsubmit="return submitFallback(event)">
+      <label for="name">Your Name</label>
+      <input id="name" name="name" type="text" required />
+
+      <label for="email">Email Address</label>
+      <input id="email" name="email" type="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  
+  function submitFallback(e) {
+    const name = encodeURIComponent(document.getElementById('name').value);
+    const email = encodeURIComponent(document.getElementById('email').value);
+    const msg = encodeURIComponent(document.getElementById('message').value);
+    const subject = encodeURIComponent('Website contact from ' + name);
+    const body = encodeURIComponent(
+      'Name: ' + name + '%0D%0AEmail: ' + email + '%0D%0A%0D%0A' + msg
+    );
+    window.location.href = 'mailto:27ankurjain@gmail.com?subject=' + subject + '&body=' + body;
+    return false;
+  }
+</script>
+
+</body>
+</html>

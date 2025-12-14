@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales and Customer Analysis</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Business Performance Dashboard | 2023</h1>
+  <p>Insights into Customer Behavior, Sales Performance, and Profitability - 2023</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+     <!-- PROJECT 1 -->
+  <div class="project">
+    <!-- AUTO CAROUSEL -->
+    <div class="carousel" id="carousel1">
+            <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/Sales Dashboard.png" />
+      <img class="active" src="images/projects/dashboards/Customer Dashboard.png" />
+    </div>
+
+    <div class="dots" id="dots1"></div>
+
+  </div>
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>The dashboards analyze 2023 performance vs. 2022, highlighting trends in customers, orders, sales, profit, and quantities. They break down results by time, customer contribution, order frequency, and product subcategories, enabling data-driven decisions to improve revenue and profitability.</p>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights</h3>
+          <ul>
+            <li><strong>Strong Year-over-Year Growth</strong></li>
+            Customers, sales, orders, and quantity all show double-digit growth compared to the previous year, indicating healthy business expansion.
+            <li><strong>Order Volume Driving Performance</strong></li>
+            A significant increase in total orders has directly contributed to higher sales and profit, suggesting improved customer engagement.
+            <li><strong>Few Customers Drive High Profit</strong></li>
+            The top 10 customers contribute a substantial share of total profit, highlighting the importance of retaining high-value customers.
+            <li><strong>Category-Level Profit Variability</strong></li>
+            While several subcategories generate strong profits, a few consistently incur losses, signaling optimization opportunities.
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Summary</h3>
+          <ul>
+            <li><strong>Customer Growth & Engagement</strong></li>
+            The business served 693 customers, reflecting steady growth over last year. Most customers place 1-3 orders, indicating repeat purchases but also potential to increase order frequency.
+            <li><strong>Sales per Customer Performance</strong></li>
+            Average sales per customer reached $1,058, showing improved customer value. This suggests successful upselling or increased basket size.
+            <li><strong>Order Trends</strong></li>
+            With 1,687 total orders, order volume grew sharply year-over-year. Monthly trends show clear peaks and dips, helping identify high and low demand periods.
+            <li><strong>Overall Sales & Profit</strong></li>
+            Total sales reached $733K with $93K in profit, confirming that revenue growth is translating into profitability, not just volume.
+            <li><strong>Subcategory Analysis</strong></li>
+            Categories like Phones, Chairs, and Binders perform strongly in sales and profit, while some categories consistently generate losses, impacting margins.
+            <li><strong>Time-Based Performance Trends</strong></li>
+            Weekly and monthly sales and profit trends show periods above and below average, providing insights into seasonality and promotional effectiveness.
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            <li><p>The 2023 dashboards reveal a growing and profitable business driven by rising customer engagement and order volume. Focusing on high-value customers, improving low-performing categories, and leveraging peak sales periods can further enhance revenue and profitability moving forward.</p></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li>Tableau Desktop, Google Sheet</li>
+          </ul>
+        </article>
+        <a class="btn" onclick="window.location.href='projects.html'">Back to Projects</a>
+      </div>
+    </section>
+ 
+
+
+
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 3000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>
