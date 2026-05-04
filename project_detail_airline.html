@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airline Customer Satisfaction Analysis Report</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+</head>
+<body>
+<!-- HEADER -->
+<div id="header"></div>
+
+  <!-- HERO -->
+<section class="hero">
+  <h1>Airline Customer Satisfaction Analysis Report</h1>
+  <p>Understanding Passenger Experiences and Identifying Improvement Opportunities</p>
+</section>
+
+<!-- CONTENT -->
+<div class="container">
+
+     <!-- PROJECT 1 -->
+  <div class="project">
+    <div class="carousel" id="carousel1">
+            <span class="arrow left" onclick="prevSlide(1)">❮</span>
+      <span class="arrow right" onclick="nextSlide(1)">❯</span>
+
+      <img class="active" src="images/projects/dashboards/airline_1.jpg" />
+      <img class="active" src="images/projects/dashboards/airline_2.jpg" />
+    </div>
+    <div class="dots" id="dots1"></div>
+  </div>
+
+  <!-- CONTENT SLIDE (Article + Sidebar) -->
+    <section class="slide content">
+      <div class="content-inner">
+        <article class="article">
+          <h3 class="section-title">Overview</h3>
+            <p>This project focuses on analyzing airline passenger satisfaction using Power BI. The objective was to transform raw survey data into meaningful insights that help understand how operational factors (like delays) and service quality influence overall customer experience.
+
+            The dashboard is designed with a business-first approach, enabling quick decision-making through high-level KPIs and deeper service-level analysis.</p>
+
+          <h3 class="section-title" style="margin-top:26px">Key Insights</h3>
+          <ul>
+            <li>Arrival delays have a strong negative impact on customer satisfaction.</li>
+            <li>Business class passengers consistently report higher satisfaction compared to economy.</li>
+            <li>Digital services such as WiFi and online booking show lower ratings and improvement scope.</li>
+            <li>Core services like cleanliness, seat comfort, and onboard service are key drivers of satisfaction.</li>
+            <li>Customer experience varies significantly across travel type and service categories.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Page 1: Executive Overview</h3>
+          <ul>
+            <li>This page provides a high-level summary of overall performance and customer segments.</li>
+            <h3 class="section-title" style="margin-top:26px">Key Components</h3>
+              <ul>
+                <li>KPI cards: Total customers, satisfaction rate, average delays</li>
+                <li>Satisfaction distribution across customer segments</li>
+                <li>Analysis by class and type of travel</li>
+                <li>Delay impact on satisfaction using categorized delay groups</li>
+                <li>Customer segmentation for quick comparison</li>
+              </ul>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Page 2: Service Quality Analysis</h3>
+          <ul>
+            <li>This page dives deeper into service-level performance to identify strengths and gaps.</li>
+            <h3 class="section-title" style="margin-top:26px">Key Components</h3>
+              <ul>
+                <li>Unpivoted service data for flexible analysis</li>
+                <li>Average ratings across all service attributes</li>
+                <li>Comparison of satisfied vs dissatisfied customer ratings</li>
+                <li>Heatmap to analyze service performance across different classes</li>
+                <li>Focused analysis on digital services (WiFi, online booking, boarding)</li>
+              </ul>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">The Takeaway</h3>
+          <ul>
+            This project highlights the importance of combining operational metrics with customer experience data to get a complete picture.</li>
+            <li>It also demonstrates how proper data transformation (like unpivoting) and structured visualization can significantly improve the quality of insights.</li>
+            <li>Most importantly, it reinforces that effective dashboards are not just about visuals — they are about answering real business questions.</li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top:26px">Tools Used</h3>
+          <ul>
+            <li>Power BI Desktop, Power Point, Excel</li>
+          </ul>  
+        </article>
+        <a class="btn" onclick="window.location.href='projects.html'">Back to Projects</a>
+      </div>
+    </section>
+</div>
+
+  <!-- FOOTER -->
+<div id="footer"></div>
+<script src="include.js"></script>
+<script>
+  loadHTML("#header", "header.html");
+  loadHTML("#footer", "footer.html");
+  function setupCarousel(id){
+    let index = 0;
+    const carousel = document.getElementById("carousel"+id);
+    const slides = carousel.querySelectorAll("img");
+    const dotsContainer = document.getElementById("dots"+id);
+
+    // create dots
+    slides.forEach((_, i)=>{
+        const d = document.createElement("span");
+        d.className = "dot" + (i===0 ? " active" : "");
+        d.onclick = ()=> show(i);
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+
+    function show(i){
+        slides[index].classList.remove("active");
+        dots[index].classList.remove("active");
+
+        index = (i + slides.length) % slides.length;
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    window["nextSlide"] = function(idCheck){
+        if(idCheck === id) show(index + 1);
+    }
+
+    window["prevSlide"] = function(idCheck){
+        if(idCheck === id) show(index - 1);
+    }
+
+    // auto-slide every 4 seconds
+    setInterval(() => show(index + 1), 1000);
+  }
+
+  setupCarousel(1);
+  setupCarousel(2);
+  setupCarousel(3);
+  setupCarousel(4);
+  setupCarousel(5);
+</script>
+</body>
+</html>
